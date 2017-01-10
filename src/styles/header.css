@@ -1,0 +1,60 @@
+/*
+  Block Styles
+ */
+.header {
+  min-height: 400px;
+  width: 100%;
+  background: green;
+  color: #fff;
+  padding: 30px 10px;
+}
+
+/*
+  Element Styles
+ */
+
+.header__title {
+  margin: 0;
+}
+
+.header__link {
+  color: #fff;
+}
+
+.header__link i {
+  margin-right: 10px;
+}
+
+.header__info {
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+}
+
+/*
+  media queries
+ */
+
+@media (max-width: 600px) {
+  .header__subTitle {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 490px) {
+  .header {
+    padding: 10px;
+  }
+
+  .header__title {
+    font-size: 16px;
+  }
+
+  .header__subTitle {
+    font-size: 18px;
+  }
+
+  .header__link i {
+    font-size: 32px;
+  }
+}

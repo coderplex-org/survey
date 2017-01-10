@@ -1,0 +1,146 @@
+.form {
+  position: relative;
+  width: 100%;
+}
+
+.form__card {
+  max-width: 650px;
+  background: #fff;
+  margin: 0 auto;
+  margin-top: -230px;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.12);
+  padding: 20px;
+}
+
+.form__cardDescription {
+  font-size: 24px;
+  text-align: justify;
+}
+
+.form__cardQuestion {
+  margin: 0;
+}
+
+.form__cardQuestion--bgc {
+  background-color: #f1f2f3;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__cardQuestionLink {
+  font-size: 16px;
+}
+
+.form__cardSubWrapper {
+  padding-bottom: 30px;
+}
+
+.form__cardOptions {
+  padding: 0;
+  list-style-type: none;
+}
+
+.form__cardOptionItem {
+  margin: 20px 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.form__cardOptionInput {
+  margin-right: 12px;
+}
+
+.form__cardOptionLabel {
+  user-select: none;
+  flex: 1;
+}
+
+.form__submitWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form__submit {
+  border: none;
+  outline: none;
+  background: #eee;
+  color: #666;
+  padding: 8px 16px;
+  font-size: 24px;
+  box-shadow: 0 0 2px #888;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.form__submit:hover {
+  box-shadow: 0 0 4px #888;
+  background: #ccc;
+}
+
+.form__submit--facebook {
+  background: #3b5998;
+  color: #fff;
+}
+
+.form__submit--facebook:hover {
+  background: #4566ab;
+}
+
+.form__cardSubWrapper .form__cardOptionItem {
+  margin: 0;
+  padding: 20px 10px;
+}
+
+.form__cardSubWrapper .form__cardOptionItem:nth-child(odd) {
+  background: #eee;
+}
+
+.form__cardSubWrapper .form__cardOptionItem:nth-child(even) {
+  background: #ddd;
+}
+
+/*
+  media queries
+ */
+
+@media (max-width: 600px) {
+  .form,
+  .form__card {
+    min-height: calc(100vh - 250px);
+  }
+
+  .form__card {
+    margin-top: -180px;
+  }
+
+  .form__cardDescription {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .form__cardSubWrapper .form__cardOptionItem {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 490px) {
+  .form,
+  .form__card {
+    min-height: calc(100vh - 140px);
+  }
+
+  .form__card {
+    margin-top: -260px;
+  }
+
+  .form__cardQuestion {
+    font-size: 18px;
+    text-align: center;
+  }
+}
