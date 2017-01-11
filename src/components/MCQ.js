@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
 
 export default class MCQ extends Component{
   constructor(props) {
@@ -13,11 +12,17 @@ export default class MCQ extends Component{
     if(localStorage.getItem('currentIndex')) {
       const selectedResources = JSON.parse(localStorage.getItem('selectedResources'));
       const currentIndex = JSON.parse(localStorage.getItem('currentIndex'));
-      if(currentIndex < selectedResources.length) {
-        browserHistory.push(`/question/${selectedResources[currentIndex]}`)
+      if(currentIndex === 0) {
+        this.setState({
+          answer: selectedResources
+        });
+      } else if(currentIndex < selectedResources.length) {
+        this.context.router.push(`/question/${selectedResources[currentIndex]}`)
         return;
       }
-      browserHistory.push(`/finish`);
+      if(localStorage.getItem('done')){
+        this.context.router.push(`/finish`);
+      }
     }
   }
   saveAnswer(answer, e) {
@@ -88,3 +93,7 @@ export default class MCQ extends Component{
     )
   }
 }
+
+MCQ.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
 import axios from 'axios';
 import Header from './Header';
 import MCQ from './MCQ';
@@ -17,6 +16,24 @@ export default class Question extends Component {
       saving: false
     }
   }
+  componentWillMount() {
+    const localStorage = window.localStorage;
+    const selectedResources =localStorage.getItem('selectedResources');
+    const responses = localStorage.getItem('responses');
+    const currentIndex = localStorage.getItem('currentIndex');
+    const done = localStorage.getItem('done');
+    if(done) {
+      this.context.router.push('/finish');
+      return;
+    }
+    if(selectedResources && responses && currentIndex) {
+      this.setState({
+        selectedResources,
+        currentIndex,
+        responses
+      });
+    }
+  }
   handelMCQAnswer(selectedResources, currentIndex, responses) {
     this.setState({
       responses,
@@ -28,7 +45,7 @@ export default class Question extends Component {
       const selectedResources = JSON.parse(localStorage.getItem('selectedResources'));
       const currentIndex = JSON.parse(localStorage.getItem('currentIndex'));
       if(currentIndex < selectedResources.length) {
-        browserHistory.push(`/question/${selectedResources[currentIndex]}`)
+        this.context.router.push(`/question/${selectedResources[currentIndex]}`)
         return;
       }
     }
@@ -46,19 +63,15 @@ export default class Question extends Component {
     axios.post('https://survey-api.now.sh',JSON.stringify(responses),config)
       .then(res => {
         localStorage.setItem("done", JSON.stringify(true));
-        browserHistory.push('/finish');
+        this.context.router.push('/finish');
         console.log(res)
       })
       .catch(e => console.log(e));
   }
   handelRQAnswer(currentIndex, responses) {
-    this.setState({
-      responses,
-      currentIndex
-    })
     const selectedResources = this.state.selectedResources;
     if(currentIndex < selectedResources.length) {
-      browserHistory.push(`/question/${selectedResources[currentIndex]}`)
+      this.context.router.push(`/question/${selectedResources[currentIndex]}`)
       return;
     }
     this.setState({saving: true})
@@ -70,7 +83,7 @@ export default class Question extends Component {
       return question.mainQuestion === resourceName;
     })[0];
     if(!question) {
-      browserHistory.push('/404');
+      this.context.router.push('/404');
       return;
     }
     if(question.type === 'MCQ') {
@@ -86,6 +99,7 @@ export default class Question extends Component {
               next={this.handelRQAnswer.bind(this)}
               question={question}
               resourceName={resourceName}
+              router={this.context.router}
             />
   }
   render() {
@@ -99,3 +113,7 @@ export default class Question extends Component {
     )
   }
 }
+
+Question.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

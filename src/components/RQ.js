@@ -17,22 +17,12 @@ export default class RQ extends Component {
       transition: 'scale'
     };
   }
-  componentDidMount() {
-    window.onpopstate = this.onBackButtonEvent.bind(this);
-  }
-  onBackButtonEvent() {
-    const localStorage = window.localStorage;
-    const currentIndex = JSON.parse(localStorage.getItem('currentIndex')) - 1;
-    if(currentIndex < 0) {
-      this.showAlert('Cant Go Back');
-      return;
-    }
-    localStorage.setItem('currentIndex', JSON.stringify(currentIndex));
-  }
   componentWillMount() {
     const resourceName = this.props.resourceName;
     const responses = JSON.parse(localStorage.getItem('responses'));
-    console.log(responses);
+    if(!responses) {
+      this.context.router.push('/question/Which of the following resources have you used for learning HTML and CSS');
+    }
     const answer = responses[resourceName];
     const text = answer.desc || '';
     const rating = answer.rating || {};
@@ -102,7 +92,7 @@ export default class RQ extends Component {
           ratingQues = subQuestions[1];
     return (
       <section className="form__card">
-        <h2 className="form__cardQuestion form__cardQuestion--bgc animated zoomIn">
+        <h2 className="form__cardQuestion form__cardQuestion--bgc animated zoomIn text-center">
           <span>{mainQuestion}</span>
           <a className="form__cardQuestionLink" href={website} target="_blank">({website})</a>
         </h2>
@@ -154,3 +144,7 @@ export default class RQ extends Component {
     )
   }
 }
+
+RQ.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
