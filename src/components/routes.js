@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './App';
 import Home from './Home';
 import Question from './Question';
@@ -7,7 +7,7 @@ import Finish from './Finish';
 import NotFound from './NotFound';
 
 export default (
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <Route path='/' component={App}>
         <IndexRoute component={Home} />
         <Route path='/question/:resourceName' component={Question} />
