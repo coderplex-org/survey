@@ -178,7 +178,7 @@ textarea {
   border-bottom: 1px solid #888;
   outline: none;
   font-size: 18px;
-  height: 24px;
+  min-height: 24px;
   line-height: 24px;
   margin: 0;
   padding: 0;
